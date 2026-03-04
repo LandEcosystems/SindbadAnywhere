@@ -1,4 +1,4 @@
-## Sindbad Development Workspace
+## Sindbad Anywhere
 
 This repository (`Sindbad-Dev-Template`) is a template repo for local development of the
 Sindbad suite of packages. It keeps a shared Julia environment at the root while each

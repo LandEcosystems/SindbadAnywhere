@@ -13,4 +13,6 @@ dev/
 dev.*
 tmp*
 **/Manifest.toml
+data/
+**/output_*
 
