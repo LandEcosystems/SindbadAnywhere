@@ -3,7 +3,7 @@
 # some of the things that will be using... Julia tools, SINDBAD tools, local codes...
 import Pkg
 Pkg.activate(".")
- using Revise
+using Revise
 using Sindbad
 using Dates
 #using Plots
@@ -84,7 +84,6 @@ println("Outputs of plotting will be here: " * info.output.dirs.figure);
 # ================================== another model ================================================ 
 # all of the above with another model...
 # only spin up the moisture pools
-spinup_sequence = getSpinupSequenceSite();
 
 # just change the model setup and experiment name
 experiment_json = joinpath(@__DIR__,"settings_LUE","experiment.json");
@@ -94,7 +93,6 @@ replace_info    = Dict("experiment.basics.time.date_begin" => "$(begin_year)-01-
     "experiment.basics.name" => experiment_name,
     "experiment.basics.time.date_end" => "$(end_year)-12-31",
     "experiment.flags.run_optimization" => run_optimization,
-    "experiment.model_spinup.sequence" => spinup_sequence,
     "forcing.default_forcing.data_path" => path_input,
     "forcing.subset.site" => [site_index],
     "experiment.model_output.path" => path_output,

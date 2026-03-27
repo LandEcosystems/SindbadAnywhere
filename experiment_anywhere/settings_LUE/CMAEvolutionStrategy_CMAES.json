@@ -3,8 +3,8 @@
   "options": {
     "ftol":1e-16, 
     "xtol":1e-16,
-    "maxfevals": 10000000,
-    "multi_threading": true,
-    "parallel_evaluation": true},
+    "maxfevals": 100,
+    "multi_threading": false,
+    "parallel_evaluation": false},
   "package": "CMAEvolutionStrategy"
 }

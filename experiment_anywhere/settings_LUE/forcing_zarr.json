@@ -22,9 +22,7 @@
     "data_path": null,
     "source_variable": null
   },
-  "subset": {
-    "site": [1, 205]
-  },
+
   "variables": {
     "f_ambient_CO2": {
       "bounds": [200, 500],
