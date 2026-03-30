@@ -6,7 +6,7 @@ Pkg.activate(".")
 using Revise
 using Sindbad
 using Dates
-#using Plots
+using Plots
 using Sindbad.Visualization
 using CMAEvolutionStrategy
 toggle_type_abbrev_in_stacktrace()
@@ -23,7 +23,7 @@ path_output         = "data/output";
 # ================================== setting up the experiment ====================================
 # experiment is all set up according to a (collection of) json file(s)
 experiment_json     = joinpath(@__DIR__,"settings_LUE","experiment_lazy.json");
-experiment_name     = "LUE_spatial_eager";
+experiment_name     = "LUE_spatial_lazy_xmap";
 begin_year          = 1979;
 end_year            = 2017;
 
@@ -48,17 +48,16 @@ replace_info = Dict("experiment.basics.time.date_begin" => "$(begin_year)-01-01"
 
 
 
-info = getExperimentInfo(experiment_json; replace_info=replace_info); # note that this will modify information from json with the replace_info
+@time info = getExperimentInfo(experiment_json; replace_info=replace_info); # note that this will modify information from json with the replace_info
 forcing = getForcing(info);
-@time runTEMYax(info.models.forward, forcing, info)
+@time outcubes = runTEMYax(info.models.forward, forcing, info)
 
 
-
+output_vars = last.(info.output.variables);
 ds = forcing.data[1];
-# plotdat = out_opti.output.optimized;
-plotdat = output_default.output;
+plotdat = outcubes;
+domain="globe"
 plots_default(titlefont=(20, "times"), legendfontsize=18, tickfont=(15, :blue))
-output_vars = keys(plotdat)
 for i ∈ eachindex(output_vars)
     v = output_vars[i]
     # vinfo = getVariableInfo(v, info.experiment.basics.temporal_resolution)
@@ -72,7 +71,7 @@ for i ∈ eachindex(output_vars)
         plots_savefig(joinpath(info.output.dirs.figure, "$(domain)_$(vname).png"))
     else
         foreach(axes(pd, 2)) do ll
-            Plotsheatmap(pd[:, ll, :]; title="$(vname)" , size=(2000, 1000))
+            Plots.heatmap(pd[:, ll, :]; title="$(vname)" , size=(2000, 1000))
             # Colorbar(fig[1, 2], obj)
             plots_savefig(joinpath(info.output.dirs.figure, "$(domain)_$(vname)_$(ll).png"))
         end
