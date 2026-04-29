@@ -2,6 +2,7 @@
 AWS = "fbe9abb3-538b-5e4e-ba9e-bc94f4f92ebc"
 CMAEvolutionStrategy = "8d3b24bd-414e-49e0-94fb-163cc3a3e411"
 DimensionalData = "0703355e-b756-11e9-17c0-8b28908087d0"
+DiskArrayEngine = "2d4b2e14-ccd6-4284-b8b0-2378ace7c126"
 ErrorMetrics = "c324fbf6-076a-4da5-8ad2-21081a6b285c"
 GLMakie = "e9467ef8-e4e7-5192-8a1a-b1aee30e663a"
 Makie = "ee78f7c6-11fb-53f2-987a-cfe4a2b5a57a"

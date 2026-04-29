@@ -6,7 +6,7 @@ Pkg.activate(".")
 using Revise
 using Sindbad
 using Dates
-using Plots
+#using Plots
 using Sindbad.Visualization
 using CMAEvolutionStrategy
 toggle_type_abbrev_in_stacktrace()
@@ -49,8 +49,8 @@ replace_info = Dict("experiment.basics.time.date_begin" => "$(begin_year)-01-01"
 
 
 @time info = getExperimentInfo(experiment_json; replace_info=replace_info); # note that this will modify information from json with the replace_info
-forcing = getForcing(info);
-@time outcubes = runTEMYax(info.models.forward, forcing, info)
+@time forcing = getForcing(info);
+@time outdataset = runTEMYax(info.models.forward, forcing, info)
 
 
 output_vars = last.(info.output.variables);
