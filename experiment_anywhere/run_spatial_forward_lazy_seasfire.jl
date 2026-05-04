@@ -28,8 +28,7 @@ experiment_name     = "LUE_spatial_lazy_xmap";
 begin_year          = 1979;
 end_year            = 2017;
 
-path_zarr = "https://s3.bgc-jena.mpg.de:9000/sindbad/FLUXNET_v2023_12_1D.zarr"
-path_zarr = "data/FLUXNET_v2023_12_1D_REPLACED_Noise003_v1.zarr"
+path_zarr = "https://s3.bgc-jena.mpg.de:9000/misc/seasfire_rechunked.zarr"
 
 # setting up the model spinup sequence : can change according to the site...
 #spinup_sequence = getSpinupSequenceSite(y_dist, begin_year);
@@ -54,7 +53,7 @@ replace_info = Dict("experiment.basics.time.date_begin" => "$(begin_year)-01-01"
 @time forcing = getForcing(info);
 @time outdataset = runTEMYax(info.models.forward, forcing, info)
 
-
+@time outdata_disk = compute_to_zarr(outdataset, joinpath(path_output, "forward_run_xmap.zarr"); overwrite=true)
 output_vars = last.(info.output.variables);
 ds = forcing.data[1];
 plotdat = outcubes;

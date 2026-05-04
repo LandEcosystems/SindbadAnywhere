@@ -16,3 +16,4 @@ tmp*
 data/
 **/output_*
 
+*.code-workspace

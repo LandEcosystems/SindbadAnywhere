@@ -39,6 +39,7 @@ replace_info = Dict("experiment.basics.time.date_begin" => "$(begin_year)-01-01"
    # "experiment.basics.domain" => domain,
     "experiment.basics.name" => experiment_name,
     "experiment.basics.time.date_end" => "$(end_year)-12-31",
+    "experiment.flags.run_optimization" => true,
     #"experiment.model_spinup.sequence" => spinup_sequence,
     "forcing.default_forcing.data_path" => path_zarr,
     "experiment.model_output.path" => path_output,
@@ -54,7 +55,9 @@ replace_info = Dict("experiment.basics.time.date_begin" => "$(begin_year)-01-01"
 @time forcing = getForcing(info);
 @time outdataset = runTEMYax(info.models.forward, forcing, info)
 
-
+#Now we run the optimization 
+@time optimizeTEMYax(forcing, outdataset,info, info.optimization,  )
+@time outdata_disk = compute_to_zarr(outdataset, joinpath(path_output, "forward_run_xmap.zarr"); overwrite=true)
 output_vars = last.(info.output.variables);
 ds = forcing.data[1];
 plotdat = outcubes;
