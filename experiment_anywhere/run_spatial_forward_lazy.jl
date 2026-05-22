@@ -29,7 +29,7 @@ begin_year          = 1979;
 end_year            = 2017;
 
 path_zarr = "https://s3.bgc-jena.mpg.de:9000/sindbad/FLUXNET_v2023_12_1D.zarr"
-path_zarr = "data/FLUXNET_v2023_12_1D_REPLACED_Noise003_v1.zarr"
+# path_zarr = "data/FLUXNET_v2023_12_1D_REPLACED_Noise003_v1.zarr"
 
 # setting up the model spinup sequence : can change according to the site...
 #spinup_sequence = getSpinupSequenceSite(y_dist, begin_year);
@@ -57,7 +57,7 @@ replace_info = Dict("experiment.basics.time.date_begin" => "$(begin_year)-01-01"
 
 output_vars = last.(info.output.variables);
 ds = forcing.data[1];
-plotdat = outcubes;
+plotdat = outdataset;
 domain="globe"
 plots_default(titlefont=(20, "times"), legendfontsize=18, tickfont=(15, :blue))
 for i ∈ eachindex(output_vars)
@@ -66,7 +66,7 @@ for i ∈ eachindex(output_vars)
     vname = v
     # vname = vinfo["standard_name"]
     println("plot output-model => domain: $domain, variable: $vname")
-    pd = plotdat[i]
+    pd = plotdat[vname].data
     if size(pd, 2) == 1
         Plots.heatmap(pd[:, 1, :]; title="$(vname)" , size=(2000, 1000))
         # Colorbar(fig[1, 2], obj)
