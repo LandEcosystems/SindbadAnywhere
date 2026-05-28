@@ -53,6 +53,7 @@ replace_info = Dict("experiment.basics.time.date_begin" => "$(begin_year)-01-01"
 
 @time info = getExperimentInfo(experiment_json; replace_info=replace_info); # note that this will modify information from json with the replace_info
 @time forcing = getForcing(info);
+run_helpers = prepTEM(forcing, info)
 @time outdataset = runTEMYax(info.models.forward, forcing, info)
 
 #Now we run the optimization 
