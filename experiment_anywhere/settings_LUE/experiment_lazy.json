@@ -54,7 +54,9 @@
       "diagnostics.gpp_potential": null,
       "diagnostics.gpp_f_airT": null,
       "diagnostics.gpp_f_light": null,
-      "diagnostics.gpp_f_vpd": null
+      "diagnostics.gpp_f_vpd": null,
+      "pools.TWS": "d_tws",
+      "pools.soilW": "d_soil"
     }
   },
   "model_spinup": {
